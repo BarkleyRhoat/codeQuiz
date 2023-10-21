@@ -1,0 +1,32 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: white;
+}
+
+nav {
+    display: flex;
+    color: purple;
+    justify-content: space-between;
+    font-size: 16px;
+    
+}
+
+.homePage {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+#start-button {
+    display: flex;
+    justify-content: center;
+    background-color: purple;
+
+
+
+}
+
+/* #start-button:hover {
+    color: black;
+} */

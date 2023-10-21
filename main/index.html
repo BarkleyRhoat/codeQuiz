@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Questionnaire</title>
-</head>
-<body>
-    <h1>Highscore Element</h1>
-    <ul id="highscore"></ul>
-    <h1>Questionnaire</h1>
-    <p id="question"></p>
-    <input type="text" id="answer">
-    <button id="nextButton">Next Question</button>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Code Quiz</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div>highscore: <span id="score">0</span></div>
+        <div id="timer">Timer: 60</div>
+      </nav>
+
+      <section class="homePage">
+        <h1>Coding Quiz Challenge</h1>
+        <p>
+          Try to answer the following code-related questions within the time
+          limit. Keep in mind that incorrect answers will penalize your
+          score/time by 15 seconds!
+        </p>
+      </section>
+
+      <button id="start-button">Start</button>
+
+      <div id="question-container">
+        <p id="question"></p>
+        <ul id="options"></ul>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
