@@ -2,7 +2,7 @@
     const startButton = document.getElementById("start-button");
     const questionContainer = document.getElementById("question-container");
     const questionElement = document.getElementById("question");
-    const optionsElement = document.getElementById("options");
+    const optionsElement = document.getElementById("options")
     const timerElement = document.getElementById("timer");
     const scoreElement = document.getElementById("score");
 //questions for the quiz
@@ -18,18 +18,18 @@ const questions = [
       correctAnswer: "parenthesis",
     },
     {
-        questions: "Arrays in javascript can be used to store?",
+        question: "Arrays in javascript can be used to store?",
         options: ["numbers and strings", "other arrays", "booleans", "all of the above"],
         correctAnswer: "all of the above",
     },
     {
-        questions:"String values must be enclosed within __ when being assigned to variables?",
-        option: ["commas", "curly brackets", "quotes", "parenthesis"],
+        question:"String values must be enclosed within __ when being assigned to variables?",
+        options: ["commas", "curly brackets", "quotes", "parenthesis"],
         correctAnswer: "curly brackets",
     },
     {
-        questions:"A very useful tool used during development and debugging for printing content to debugger is?",
-        option: ["javascript", "terminal/bash", "for loops", "console log"],
+        question:"A very useful tool used during development and debugging for printing content to debugger is?",
+        options: ["javascript", "terminal/bash", "for loops", "console log"],
         correctAnswer: "console log",
     }
 ];
@@ -42,6 +42,7 @@ const questions = [
     startButton.addEventListener("click", startGame);
 
     function startGame() {
+        optionsElement.outerHTMLHTML = "";
         showQuestion(0);
         startTimer();
     }
@@ -51,7 +52,7 @@ const questions = [
         questionElement.textContent = currentQuestion.question;
         optionsElement.innerHTML = "";
         currentQuestion.options.forEach(option => {
-            var optionItem = document.createElement("li");
+            var optionItem = document.createElement("button");
             optionItem.textContent = option;
             optionItem.addEventListener("click", () => checkAnswer(option, currentQuestion.answer));
             optionsElement.appendChild(optionItem);
@@ -64,7 +65,7 @@ const questions = [
             timerElement.textContent = `Time: ${timeLeft}`;
             if (timeLeft <= 0 || currentQuestionIndex >= questions.length) {
                 clearInterval(timerInterval);
-                endGame();
+                endQuiz();
             }
         }, 1000);
     }
@@ -73,29 +74,29 @@ const questions = [
         if (selectedOption === correctAnswer) {
             score++;
         } else {
-            timeLeft -= 15;
+            // timeLeft -= 15;
         }
         scoreElement.textContent = score;
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
             showQuestion(currentQuestionIndex);
         } else {
-            endGame();
+            endQuiz();
         }
     }
     
 
     function endQuiz(){
-        if(timeLeft <=0){
-            timeLeft = 0;
-        }
-            clearInterval(timerInterval)
+        // if(timeLeft <=0){
+        //     timeLeft = 0;
+        // }
+        //     clearInterval(timerInterval)
 
     var input = document.createElement("input");
     var buttonEl = document.createElement("button");
     var inputScore = document.createElement("div");
     var textEl = document.createElement("text")
-    var allDoneEl = document.createElement("alldone");
+    var allDoneEl = document.createElement("text");
     allDoneEl.textContent = ("You did it!");
     textEl.textContent = "Enter Initials: ";
     buttonEl.textContent = "save";
@@ -106,7 +107,7 @@ const questions = [
     container.append(inputScore);
     container.append(buttonEl);
     buttonEl.addEventListener("click", saveInput)
-    }
+    
 
     function saveInput (event){
         console.log(event.target);
@@ -115,6 +116,7 @@ const questions = [
         var inputScore = event.target.parentNode.childNodes[2];
         console.log(inputInitial.value, inputScore.textContent);
         container.innerHTML = " ";
+    };
     };
 
 
