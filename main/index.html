@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <title>Code Quiz</title>
+
+   <head class="container">
+    <nav>
+      <div>highscore: <span id="score">0</span></div>
+      <div id="timer">Timer: 60</div>
+    </nav>
   </head>
   <body>
-    <div class="container">
-      <nav>
-        <div>highscore: <span id="score">0</span></div>
-        <div id="timer">Timer: 60</div>
-      </nav>
-
-      <section class="homePage">
+      <section class="quizSection" class="homePage">
         <h1>Coding Quiz Challenge</h1>
         <p>
           Try to answer the following code-related questions within the time
@@ -22,13 +22,13 @@
         </p>
       </section>
 
-      <button id="start-button">Start</button>
+      <button class="quizSection" id="start-button">Start</button>
 
       <div id="question-container">
         <p id="question"></p>
         <ul id="options"></ul>
       </div>
-    </div>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
