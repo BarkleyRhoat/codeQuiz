@@ -1,19 +1,19 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <title>Code Quiz</title>
-
-   <head class="container">
+</head>
+   <header class="container">
     <nav>
       <div>highscore: <span id="score">0</span></div>
       <div id="timer">Timer: 60</div>
     </nav>
   </head>
   <body>
-      <section class="quizSection" class="homePage">
+      <section class="quizSection homePage">
         <h1>Coding Quiz Challenge</h1>
         <p>
           Try to answer the following code-related questions within the time
@@ -29,12 +29,51 @@
         <ul id="options"></ul>
       </div>
     
+
+    <script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
       integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
       crossorigin="anonymous"
     ></script>
-    <script src="script.js"></script>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css" />
+  <title>Code Quiz</title>
+</head>
+<body>
+  <header class="container">
+    <nav>
+      <div>Highscore: <span id="score">0</span></div>
+      <div id="timer">Timer: 60</div>
+    </nav>
+  </header>
+
+  <section class="quizSection homePage">
+    <h1>Coding Quiz Challenge</h1>
+    <p>
+      Try to answer the following code-related questions within the time
+      limit. Keep in mind that incorrect answers will penalize your
+      score/time by 15 seconds!
+    </p>
+  </section>
+
+  <button class="quizSection" id="start-button">Start</button>
+
+  <div id="question-container">
+    <p id="question"></p>
+    <ul id="options"></ul>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js" integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+</body>
 </html>

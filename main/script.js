@@ -4,7 +4,7 @@ var questionElement = document.getElementById("question");
 var optionsElement = document.getElementById("options");
 var timerElement = document.getElementById("timer");
 var scoreElement = document.getElementById("score");
-var quizSection = document.getElementsByClassName("quiz-section"[0])
+var quizSection = document.getElementsByClassName("quizSection"[0])
 
 localStorage.setItem("score", "[]")
 //questions for the quiz
@@ -47,35 +47,46 @@ var currentQuestionIndex = 0;
 var score = 0;
 var timeLeft = 60;
 
-// startButton.addEventListener("click", function() {
-//     quizSection.style.display = "none";
-// })
-startButton.addEventListener("click", startGame); {
-    quizSection.style.display = "none";
-};
+
+startButton.addEventListener("click", startGame); 
+    // quizSection.style.display = "none";
+
 
 function startGame() {
-  optionsElement.outerHTMLHTML = "";
+  // quizSection.style.display = "block";
+  optionsElement.innerHTML = "";
   showQuestion(0);
   startTimer();
+
+  startButton.addEventListener("click", startGame); 
+  // quizSection.style.display = "none"; 
 }
 
 function showQuestion(index) {
   var currentQuestion = questions[index];
   questionElement.textContent = currentQuestion.question;
   optionsElement.innerHTML = "";
+
+  //create and append buttons for each
   currentQuestion.options.forEach((option) => {
     var optionItem = document.createElement("button");
     optionItem.textContent = option;
     optionItem.addEventListener("click", () =>
-      checkAnswer(option, currentQuestion.answer)
+      checkAnswer(option, currentQuestion.correctAnswer)
     );
     optionsElement.appendChild(optionItem);
   });
+
+  if (index === questions.length - 1) {
+    questionContainer.style.display = "none";
+  } else {
+    questionContainer.style.display = "block";
+  }
+
 }
 
 function startTimer() {
-  var timerInterval = setInterval(function () {
+  timerInterval = setInterval(function () {
     timeLeft--;
     timerElement.textContent = `Time: ${timeLeft}`;
     if (timeLeft <= 0 || currentQuestionIndex >= questions.length) {
@@ -88,78 +99,97 @@ function startTimer() {
 function checkAnswer(selectedOption, correctAnswer) {
   if (selectedOption === correctAnswer) {
     score++;
-  } else {
-  }
-  scoreElement.textContent = score;
-  currentQuestionIndex++;
+  } 
+scoreElement.textContent = score;
+ currentQuestionIndex++;
+ 
   if (currentQuestionIndex < questions.length) {
     showQuestion(currentQuestionIndex);
   } else {
+    clearInterval(timerInterval);
+    completedQuiz = true;
+    // quizSection.style.display = "none"
     endQuiz();
   }
 }
 
 function endQuiz() {
-    if (timeLeft <= 0) {
-      timeLeft = 0;
-    }
+  // Clear the timer if it's out of time
+  if (timeLeft <= 0) {
+    timeLeft = 0;
     clearInterval(timerInterval);
+  }
 
-    quizSection.style.display = "none";
   
-    var scoresTable = document.createElement("table");
-    var input = document.createElement("input");
-    var buttonEl = document.createElement("button");
-    var inputScore = document.createElement("div");
-    var textEl = document.createElement("text");
-    var allDoneEl = document.createElement("text");
-    allDoneEl.textContent = "You did it!";
-    textEl.textContent = "Enter Initials: ";
-    buttonEl.textContent = "Save";
-    inputScore.textContent = "Your score is: " + timeLeft;
-    container.appendChild(scoresTable);
-    container.append(allDoneEl);
-    container.append(textEl);
-    container.append(input);
-    container.append(inputScore);
-    container.append(buttonEl);
-  
-    document.getElementById("scores").addEventListener("click", displayScores);
-    
-    function displayScores() {
-      var scores = JSON.parse(localStorage.getItem("score"));
-  
-      if (scores && scores.length > 0) {
-        scoresTable.innerHTML = "";
-        var headerRow = scoresTable.insertRow(0);
-        headerRow.insertCell(0).textContent = "Initials";
-        headerRow.insertCell(1).textContent = "Score";
-  
-        for (var i = 0; i < scores.length; i++) {
-          var scoreData = scores[i];
-          var newRow = scoresTable.insertRow(i + 1);
-          newRow.insertCell(0).textContent = scoreData.initials;
-          newRow.insertCell(1).textContent = scoreData.score;
-        }
-      } else {
-        scoresTable.innerHTML = "No scores to display.";
+
+  var scoresTable = document.createElement("table");
+  var input = document.createElement("input");
+  var buttonEl = document.createElement("button");
+  var inputScore = document.createElement("div");
+  var textEl = document.createElement("text");
+  var allDoneEl = document.createElement("text");
+
+  allDoneEl.textContent = "Quiz completed!";
+  textEl.textContent = "Enter Initials: ";
+  buttonEl.textContent = "Save";
+  inputScore.textContent = "Your score is: " + score;
+
+  // Append elements to the document body
+  document.body.appendChild(scoresTable);
+  document.body.append(allDoneEl);
+  document.body.append(textEl);
+  document.body.append(input);
+  document.body.append(inputScore);
+  document.body.append(buttonEl);
+
+  // Show the end quiz elements
+  scoresTable.style.display = "block";
+  allDoneEl.style.display = "block";
+  textEl.style.display = "block";
+  input.style.display = "block";
+  inputScore.style.display = "block";
+  buttonEl.style.display = "block";
+
+  // Event listener to display scores
+  document.getElementById("scores").addEventListener("click", displayScores);
+
+  function displayScores() {
+    var scores = JSON.parse(localStorage.getItem("score"));
+
+    if (scores && scores.length > 0) {
+      scoresTable.innerHTML = "";
+      var headerRow = scoresTable.insertRow(0);
+      headerRow.insertCell(0).textContent = "Initials";
+      headerRow.insertCell(1).textContent = "Score";
+
+      for (var i = 0; i < scores.length; i++) {
+        var scoreData = scores[i];
+        var newRow = scoresTable.insertRow(i + 1);
+        newRow.insertCell(0).textContent = scoreData.initials;
+        newRow.insertCell(1).textContent = scoreData.score;
       }
+    } else {
+      scoresTable.innerHTML = "No scores to display.";
     }
-  
-    buttonEl.addEventListener("click", function () {
-      var initials = input.value;
-      if (initials === "") {
-        alert("Please enter your initials.");
-      } else {
-        var userData = {
-          initials: initials,
-          score: timeLeft,
-        };
-  
-        var existingData = JSON.parse(localStorage.getItem("score")) || [];
-        existingData.push(userData);
-        localStorage.setItem("score", JSON.stringify(existingData));
-  
-      }
-    });
+  }
+
+  // Event listener to save score
+  buttonEl.addEventListener("click", function () {
+    var initials = input.value;
+    if (initials === "") {
+      alert("Please enter your initials.");
+    } else {
+      var userData = {
+        initials: initials,
+        score: score,
+      };
+
+      var existingData = JSON.parse(localStorage.getItem("score")) || [];
+      existingData.push(userData);
+      localStorage.setItem("score", JSON.stringify(existingData));
+
+      window.location.href = "index.html";
+      
+    }
+  });
 }
